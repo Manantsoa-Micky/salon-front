@@ -17,6 +17,6 @@ export class HomeComponent {
   user$!: Observable<User>;
   constructor(private userService: UserService) {}
   ngOnInit(): void {
-    this.user$ = this.userService.getUsers();
+    // this.user$ = this.userService.getUsers();
   }
 }

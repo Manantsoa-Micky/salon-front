@@ -1,1 +1,20 @@
-<p>signup works!</p>
+<div class="border-2 flex items-center justify-center h-screen">
+  <form
+    [formGroup]="signUpForm"
+    (ngSubmit)="onSubmit()"
+    class="border-4 w-[25%] h-[60%] flex flex-col"
+  >
+    <label for="email">email : </label>
+    <input id="email" type="email" formControlName="email" />
+    <div *ngIf="signUpForm.errors?.['required']">email is required.</div>
+    <div *ngIf="signUpForm.errors?.['minlength']">Must be a valid email.</div>
+    <label for="password">password : </label>
+    <input id="password" type="password" formControlName="password" />
+    <label for="role">Role : </label>
+    <input id="role" type="text" formControlName="role" />
+    <label for="salary">salary : </label>
+    <input id="salary" type="text" formControlName="salary" />
+    <button type="submit">Create Account</button>
+    <a href="/login">Already Have an Account?</a>
+  </form>
+</div>
