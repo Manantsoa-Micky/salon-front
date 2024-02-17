@@ -1,14 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user.model';
+import { Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { CommonModule, JsonPipe } from '@angular/common';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -21,8 +14,10 @@ export class SignupComponent {
   signUpForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    salary: [0, Validators.required],
-    role: ['', Validators.required],
+    firstName: [''],
+    lastName: [''],
+    username: ['', Validators.required],
+    adress: [''],
   });
 
   isSuccessful = false;
@@ -47,9 +42,5 @@ export class SignupComponent {
         this.isSignUpFailed = true;
       },
     });
-  }
-
-  reloadPage(): void {
-    window.location.reload();
   }
 }
