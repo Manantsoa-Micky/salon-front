@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user.model';
+import { Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { StorageService } from '../_services/storage.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, JsonPipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
-  form: any = {
-    email: '',
-    password: '',
-  };
+export class LoginComponent {
+  loginForm = this.formBuilder.group({
+    email: ['', Validators.required, Validators.email],
+    password: ['', Validators.required],
+  });
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -22,17 +22,19 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private storageService: StorageService
+    private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
-    }
-  }
-
   onSubmit(): void {
-    const { email, password } = this.form;
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.isLoggedIn = true;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      },
+    });
   }
 }
