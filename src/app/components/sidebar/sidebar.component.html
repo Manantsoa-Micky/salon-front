@@ -1,11 +1,18 @@
-<div class="w-[15%] h-full">
+<div class="w-[100%] h-full">
   <div class="min-w-[250px]">
     <p-accordion [multiple]="true" [activeIndex]="[0]">
       <p-accordionTab header="Collaborateurs">
         <a [routerLink]="[{ outlets: { adminoutlet: ['list'] } }]" class="test"
-          >Tous les employés</a
+          >Liste des employés</a
         >
-        <a class="test">Ajouter un employé</a>
+        <a
+          [routerLink]="[{ outlets: { adminoutlet: ['add-employee'] } }]"
+          class="test"
+          >Ajout d'employés</a
+        >
+        <a [routerLink]="[{ outlets: { adminoutlet: ['leave'] } }]" class="test"
+          >Congés et Absences</a
+        >
       </p-accordionTab>
       <p-accordionTab header="Clients">
         <a class="test">Tous les Clients</a>

@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { ProductsComponent } from './products/products.component';
 import { CardListComponent } from './components/card-list/card-list.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { LeavesComponent } from './leaves/leaves.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +18,16 @@ export const routes: Routes = [
     component: BoardAdminComponent,
     children: [
       { path: 'list', component: CardListComponent, outlet: 'adminoutlet' },
+      {
+        path: 'add-employee',
+        component: AddEmployeeComponent,
+        outlet: 'adminoutlet',
+      },
+      {
+        path: 'leave',
+        component: LeavesComponent,
+        outlet: 'adminoutlet',
+      },
     ],
   },
 ];
