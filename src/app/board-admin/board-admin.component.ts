@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CalendarModule } from 'primeng/calendar';
 import { AccordionModule } from 'primeng/accordion';
-import { SplitterModule } from 'primeng/splitter';
-import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
-import { CardModule } from 'primeng/card';
 import { HeaderComponent } from '../components/header/header.component';
+import { CardListComponent } from '../components/card-list/card-list.component';
+import { RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-board-admin',
   standalone: true,
@@ -14,11 +14,10 @@ import { HeaderComponent } from '../components/header/header.component';
   imports: [
     CalendarModule,
     AccordionModule,
-    SplitterModule,
-    SidebarModule,
     AvatarModule,
-    CardModule,
     HeaderComponent,
+    CardListComponent,
+    RouterOutlet,
   ],
 })
 export class BoardAdminComponent {
