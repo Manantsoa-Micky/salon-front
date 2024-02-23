@@ -1,1 +1,83 @@
-<p>add-employee works!</p>
+<div class="lg:p-4 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="flex mx-auto justify-between">
+      <div class="mb-4 w-[45%]">
+        <input
+          formControlName="firstName"
+          type="text"
+          placeholder="Nom"
+          id="firstName"
+          name="firstName"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <div class="mb-4 w-1/2">
+        <input
+          formControlName="lastName"
+          placeholder="Prénom"
+          type="text"
+          id="lastName"
+          name="lastName"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+        />
+      </div>
+    </div>
+    <div class="mb-4">
+      <input
+        formControlName="email"
+        placeholder="Email"
+        type="email"
+        id="email"
+        name="email"
+        class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+      />
+    </div>
+    <div class="mb-4">
+      <input
+        formControlName="password"
+        placeholder="Mot de Passe"
+        type="password"
+        id="password"
+        name="password"
+        class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+        autocomplete="off"
+      />
+    </div>
+    <div class="mb-4">
+      <input
+        placeholder="Confirmer Mot de Passe"
+        type="password"
+        id="confirmPass"
+        name="password"
+        class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+        autocomplete="off"
+      />
+    </div>
+    <div class="mb-4">
+      <input
+        formControlName="username"
+        placeholder="Nom d'utilisateur"
+        type="text"
+        id="username"
+        name="username"
+        class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+      />
+    </div>
+    <div class="mb-8">
+      <input
+        formControlName="adress"
+        placeholder="Adresse"
+        type="text"
+        id="adress"
+        name="adress"
+        class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+      />
+    </div>
+    <button
+      type="submit"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+    >
+      Ajouter un Collaborateur
+    </button>
+  </form>
+</div>
