@@ -3,29 +3,9 @@
     <app-header></app-header>
   </div>
   <div class="flex h-[100%]">
-    <div class="w-[15%] h-full">
-      <div class="min-w-[250px]">
-        <p-accordion [multiple]="true" [activeIndex]="[0]">
-          <p-accordionTab header="Collaborateurs">
-            <p class="test">Tous les employés</p>
-            <p class="test">Ajouter un employé</p>
-          </p-accordionTab>
-          <p-accordionTab header="Clients">
-            <p class="test">Tous les Clients</p>
-            <p class="test">Blacklist</p>
-          </p-accordionTab>
-          <p-accordionTab header="Offres">
-            <p class="test">Toutes les Offres</p>
-            <p class="test">Toutes Promotions</p>
-          </p-accordionTab>
-          <p-accordionTab header="Statistiques">
-            <p class="test">Ventes</p>
-          </p-accordionTab>
-        </p-accordion>
-      </div>
-    </div>
+    <app-sidebar></app-sidebar>
     <div class="border border-red-400 p-9 flex flex-wrap gap-9">
-      <router-outlet name="admin-outlet" />
+      <router-outlet name="adminoutlet" />
     </div>
   </div>
 </div>

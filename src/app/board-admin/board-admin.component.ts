@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CalendarModule } from 'primeng/calendar';
-import { AccordionModule } from 'primeng/accordion';
 import { AvatarModule } from 'primeng/avatar';
 import { HeaderComponent } from '../components/header/header.component';
 import { CardListComponent } from '../components/card-list/card-list.component';
 import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-board-admin',
@@ -13,11 +13,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './board-admin.component.css',
   imports: [
     CalendarModule,
-    AccordionModule,
     AvatarModule,
     HeaderComponent,
     CardListComponent,
     RouterOutlet,
+    SidebarComponent,
   ],
 })
 export class BoardAdminComponent {

@@ -1,1 +1,23 @@
-<p>sidebar works!</p>
+<div class="w-[15%] h-full">
+  <div class="min-w-[250px]">
+    <p-accordion [multiple]="true" [activeIndex]="[0]">
+      <p-accordionTab header="Collaborateurs">
+        <a [routerLink]="[{ outlets: { adminoutlet: ['list'] } }]" class="test"
+          >Tous les employés</a
+        >
+        <a class="test">Ajouter un employé</a>
+      </p-accordionTab>
+      <p-accordionTab header="Clients">
+        <a class="test">Tous les Clients</a>
+        <a class="test">Blacklist</a>
+      </p-accordionTab>
+      <p-accordionTab header="Offres">
+        <a class="test">Toutes les Offres</a>
+        <a class="test">Toutes Promotions</a>
+      </p-accordionTab>
+      <p-accordionTab header="Statistiques">
+        <a class="test">Ventes</a>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>
