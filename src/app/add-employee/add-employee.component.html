@@ -1,93 +1,112 @@
 <form
   [formGroup]="employeeForm"
   (ngSubmit)="onSubmit()"
-  class="flex flex-col gap-3 lg:p-4 md:p-52 sm:20 p-8 w-full lg:w-1/2"
+  class="lg:p-4 md:p-52 sm:20 justify-center flex w-full"
 >
-  <div class="flex gap-4">
-    <input
-      formControlName="firstName"
-      type="text"
-      placeholder="Nom"
-      id="firstName"
-      name="firstName"
-      class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-      autocomplete="off"
-    />
+  <div class="flex flex-col gap-6 w-1/2">
+    <div class="flex gap-8">
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Nom" formControlName="firstName" />
+      </p-inputGroup>
+      <input
+        pInputText
+        placeholder="Prénom"
+        class="w-full"
+        formControlName="lastName"
+      />
+    </div>
 
-    <input
-      formControlName="lastName"
-      placeholder="Prénom"
-      type="text"
-      id="lastName"
-      name="lastName"
-      class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-      autocomplete="off"
-    />
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-inbox"></i>
+      </p-inputGroupAddon>
+      <input
+        pInputText
+        type="email"
+        placeholder="Email"
+        formControlName="email"
+      />
+    </p-inputGroup>
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-lock"></i>
+      </p-inputGroupAddon>
+      <input
+        pInputText
+        type="password"
+        placeholder="Mot de Passe"
+        formControlName="password"
+      />
+    </p-inputGroup>
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-lock"></i>
+      </p-inputGroupAddon>
+      <input
+        pInputText
+        type="password"
+        placeholder="Confirmer le Mot de Passe"
+      />
+    </p-inputGroup>
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-user"></i>
+      </p-inputGroupAddon>
+      <input
+        pInputText
+        placeholder="Nom d'Utilisateur"
+        formControlName="username"
+      />
+    </p-inputGroup>
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-home"></i>
+      </p-inputGroupAddon>
+      <input pInputText placeholder="Adresse" formControlName="adress" />
+    </p-inputGroup>
+    <div class="flex">
+      <p-inputGroupAddon class="w-[30px]">
+        <i class="pi pi-phone"></i>
+      </p-inputGroupAddon>
+      <p-inputMask
+        mask="(+261) 99 99 999 99"
+        formControlName="phone"
+        placeholder="(+261) 34 334 00"
+      ></p-inputMask>
+    </div>
+    <div class="flex justify-start gap-6">
+      <p-dropdown
+        formControlName="role"
+        [options]="roles"
+        placeholder="Choisir un Rôle"
+      ></p-dropdown>
+      <p-inputNumber
+        formControlName="salary"
+        prefix="Ar "
+        placeholder="Ar Salaire"
+      >
+      </p-inputNumber>
+    </div>
+    <div formGroupName="hours" class="flex justify-start">
+      <p-inputMask
+        mask="99h99"
+        formControlName="begin"
+        placeholder="8h00"
+      ></p-inputMask>
+      <p class="p-3">à</p>
+      <p-inputMask
+        mask="99h99"
+        formControlName="end"
+        placeholder="17h00"
+      ></p-inputMask>
+    </div>
+    <p-button label="Ajouter un Employé" type="submit"></p-button>
   </div>
-
-  <input
-    formControlName="email"
-    placeholder="Email"
-    type="email"
-    id="email"
-    name="email"
-    class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-    autocomplete="off"
-  />
-
-  <input
-    formControlName="password"
-    placeholder="Mot de Passe"
-    type="password"
-    id="password"
-    name="password"
-    class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-    autocomplete="off"
-  />
-
-  <input
-    placeholder="Confirmer Mot de Passe"
-    type="password"
-    id="confirmPass"
-    name="password"
-    class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-    autocomplete="off"
-  />
-
-  <input
-    formControlName="username"
-    placeholder="Nom d'utilisateur"
-    type="text"
-    id="username"
-    name="username"
-    class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-    autocomplete="off"
-  />
-
-  <input
-    formControlName="adress"
-    placeholder="Adresse"
-    type="text"
-    id="adress"
-    name="adress"
-    class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-    autocomplete="off"
-  />
-
-  <input
-    formControlName="adress"
-    placeholder="Adresse"
-    type="text"
-    id="adress"
-    name="adress"
-    class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-    autocomplete="off"
-  />
-
-  <button
-    type="submit"
-    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
-  >
-    Ajouter un Collaborateur
-  </button>
 </form>
