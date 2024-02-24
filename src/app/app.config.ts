@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpRequestInterceptor } from './_helpers/http.interceptor';
 import { provideStore } from '@ngrx/store';
-
+import { MessageService } from 'primeng/api';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
@@ -14,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([httpRequestInterceptor])),
     provideStore(),
     provideAnimationsAsync(),
+    MessageService,
   ],
 };
