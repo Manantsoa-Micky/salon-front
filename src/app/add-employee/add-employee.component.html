@@ -76,5 +76,11 @@
       type="submit"
       [disabled]="employeeForm.invalid"
     ></p-button>
+    <div class="flex justify-center w-full">
+      <p-progressSpinner
+        *ngIf="isLoading"
+        ariaLabel="loading"
+      ></p-progressSpinner>
+    </div>
   </div>
 </form>

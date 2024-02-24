@@ -1,5 +1,12 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import { Component, Injector, effect, signal } from '@angular/core';
+import {
+  Component,
+  Injector,
+  Input,
+  booleanAttribute,
+  effect,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,6 +18,7 @@ import { ButtonModule } from 'primeng/button';
 import { AuthService } from '../_services/auth.service';
 import { ToastModule } from 'primeng/toast';
 import { AppMessageService } from '../_services/message.service';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-add-employee',
@@ -27,11 +35,18 @@ import { AppMessageService } from '../_services/message.service';
     ButtonModule,
     CommonModule,
     ToastModule,
+    ProgressSpinnerModule,
   ],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private injector: Injector,
+    private messageService: AppMessageService
+  ) {}
   employeeForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
@@ -47,38 +62,38 @@ export class AddEmployeeComponent {
       end: ['', Validators.required],
     }),
   });
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private injector: Injector,
-    private messageService: AppMessageService
-  ) {}
-  error = signal('');
-  onSubmit() {
-    this.authService.signup(this.employeeForm.value).subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (err) => {
-        console.log(err);
-        effect(
-          () => {
-            this.showError();
-          },
-          { injector: this.injector }
-        );
-      },
-    });
-  }
+  isLoading: boolean = false;
   roles = ['Manager', 'Employé', 'Client'];
   showError() {
-    console.log('fired');
-
     this.messageService.showToast({
       severity: 'error',
       summary: 'Oops !',
       key: 'bc',
       detail: "Une erreur s'est produite, veuillez réessayer plus tard",
+    });
+  }
+  showSuccess() {
+    this.messageService.showToast({
+      severity: 'success',
+      summary: 'Succès!',
+      key: 'bc',
+      detail: "L'utilisateur a été ajouté avec succès",
+    });
+  }
+  onSubmit() {
+    this.isLoading = true;
+    this.authService.signup(this.employeeForm.value).subscribe({
+      next: (data) => {
+        this.isLoading = false;
+        this.showSuccess();
+
+        console.log(data);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.showError();
+      },
     });
   }
 }
