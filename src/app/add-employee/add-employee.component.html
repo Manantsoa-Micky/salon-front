@@ -1,86 +1,90 @@
 <form
-  [formGroup]="employeeForm"
-  (ngSubmit)="onSubmit()"
-  class="lg:p-6 md:p-52 sm:20 bg-slate-100 h-full w-full"
+    [formGroup]="employeeForm"
+    (ngSubmit)="onSubmit()"
+    class="lg:p-6 md:p-52 sm:20 bg-slate-100 h-full w-full"
 >
-  <div class="flex flex-col gap-6 w-[46%]">
-    <div class="flex gap-8">
-      <input
-        id="firstName"
-        pInputText
-        class="w-full"
-        placeholder="Nom*"
-        formControlName="firstName"
-      />
+    <div class="flex flex-col gap-6 w-[46%]">
+        <div class="flex gap-8">
+            <input
+                id="firstName"
+                pInputText
+                class="w-full"
+                placeholder="Nom*"
+                formControlName="firstName"
+            />
 
-      <input
-        pInputText
-        placeholder="Prénom*"
-        class="w-full"
-        formControlName="lastName"
-      />
-    </div>
+            <input
+                pInputText
+                placeholder="Prénom*"
+                class="w-full"
+                formControlName="lastName"
+            />
+        </div>
 
-    <input
-      pInputText
-      type="email"
-      placeholder="Email*"
-      formControlName="email"
-    />
-    <input
-      pInputText
-      type="password"
-      placeholder="Mot de Passe"
-      formControlName="password"
-    />
-    <input pInputText type="password" placeholder="Confirmer le Mot de Passe" />
-    <input
-      pInputText
-      placeholder="Nom d'Utilisateur*"
-      formControlName="username"
-    />
-    <input pInputText placeholder="Adresse*" formControlName="adress" />
-    <div class="flex justify-start gap-6">
-      <p-inputMask
-        mask="(+261) 99 99 999 99"
-        formControlName="phone"
-        placeholder="(+261) 34 334 00*"
-      ></p-inputMask>
-      <p-dropdown
-        formControlName="role"
-        [options]="roles"
-        placeholder="Choisir un Rôle*"
-      ></p-dropdown>
-      <p-inputNumber
-        formControlName="salary"
-        prefix="Ar "
-        placeholder="Ar Salaire*"
-      >
-      </p-inputNumber>
+        <input
+            pInputText
+            type="email"
+            placeholder="Email*"
+            formControlName="email"
+        />
+        <input
+            pInputText
+            type="password"
+            placeholder="Mot de Passe"
+            formControlName="password"
+        />
+        <input
+            pInputText
+            type="password"
+            placeholder="Confirmer le Mot de Passe"
+        />
+        <input
+            pInputText
+            placeholder="Nom d'Utilisateur*"
+            formControlName="username"
+        />
+        <input pInputText placeholder="Adresse*" formControlName="adress" />
+        <div class="flex justify-start gap-6">
+            <p-inputMask
+                mask="(+261) 99 99 999 99"
+                formControlName="phone"
+                placeholder="(+261) 34 334 00*"
+            ></p-inputMask>
+            <p-dropdown
+                formControlName="role"
+                [options]="roles"
+                placeholder="Choisir un Rôle*"
+            ></p-dropdown>
+            <p-inputNumber
+                formControlName="salary"
+                prefix="Ar "
+                placeholder="Ar Salaire*"
+            >
+            </p-inputNumber>
+        </div>
+        <div formGroupName="hours" class="flex justify-start">
+            <p-inputMask
+                mask="99h99"
+                formControlName="begin"
+                placeholder="08h00*"
+            ></p-inputMask>
+            <p class="p-3">à</p>
+            <p-inputMask
+                mask="99h99"
+                formControlName="end"
+                placeholder="17h00*"
+            ></p-inputMask>
+        </div>
+        <p-button
+            label="Ajouter un Employé"
+            type="submit"
+            [disabled]="employeeForm.invalid"
+        ></p-button>
+        <div class="flex justify-center w-full">
+            <p-progressSpinner
+                *ngIf="isLoading"
+                ariaLabel="loading"
+            ></p-progressSpinner>
+        </div>
     </div>
-    <div formGroupName="hours" class="flex justify-start">
-      <p-inputMask
-        mask="99h99"
-        formControlName="begin"
-        placeholder="08h00*"
-      ></p-inputMask>
-      <p class="p-3">à</p>
-      <p-inputMask
-        mask="99h99"
-        formControlName="end"
-        placeholder="17h00*"
-      ></p-inputMask>
-    </div>
-    <p-button
-      label="Ajouter un Employé"
-      type="submit"
-      [disabled]="employeeForm.invalid"
-    ></p-button>
-    <div class="flex justify-center w-full">
-      <p-progressSpinner
-        *ngIf="isLoading"
-        ariaLabel="loading"
-      ></p-progressSpinner>
-    </div>
-  </div>
 </form>

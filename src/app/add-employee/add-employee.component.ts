@@ -1,11 +1,11 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import {
-  Component,
-  Injector,
-  Input,
-  booleanAttribute,
-  effect,
-  signal,
+    Component,
+    Injector,
+    Input,
+    booleanAttribute,
+    effect,
+    signal,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
@@ -21,79 +21,79 @@ import { AppMessageService } from '../_services/message.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
-  selector: 'app-add-employee',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    JsonPipe,
-    DropdownModule,
-    InputTextModule,
-    InputGroupModule,
-    InputGroupAddonModule,
-    InputMaskModule,
-    InputNumberModule,
-    ButtonModule,
-    CommonModule,
-    ToastModule,
-    ProgressSpinnerModule,
-  ],
-  templateUrl: './add-employee.component.html',
-  styleUrl: './add-employee.component.css',
+    selector: 'app-add-employee',
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        JsonPipe,
+        DropdownModule,
+        InputTextModule,
+        InputGroupModule,
+        InputGroupAddonModule,
+        InputMaskModule,
+        InputNumberModule,
+        ButtonModule,
+        CommonModule,
+        ToastModule,
+        ProgressSpinnerModule,
+    ],
+    templateUrl: './add-employee.component.html',
+    styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent {
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private injector: Injector,
-    private messageService: AppMessageService
-  ) {}
-  employeeForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    username: ['', Validators.required],
-    adress: ['', Validators.required],
-    role: ['', Validators.required],
-    phone: ['', Validators.required],
-    salary: ['', Validators.required],
-    hours: this.formBuilder.group({
-      begin: ['', Validators.required],
-      end: ['', Validators.required],
-    }),
-  });
-  isLoading: boolean = false;
-  roles = ['Manager', 'Employé', 'Client'];
-  showError() {
-    this.messageService.showToast({
-      severity: 'error',
-      summary: 'Oops !',
-      key: 'bc',
-      detail: "Une erreur s'est produite, veuillez réessayer plus tard",
+    constructor(
+        private formBuilder: FormBuilder,
+        private authService: AuthService,
+        private injector: Injector,
+        private messageService: AppMessageService
+    ) {}
+    employeeForm = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        username: ['', Validators.required],
+        adress: ['', Validators.required],
+        role: ['', Validators.required],
+        phone: ['', Validators.required],
+        salary: ['', Validators.required],
+        hours: this.formBuilder.group({
+            begin: ['', Validators.required],
+            end: ['', Validators.required],
+        }),
     });
-  }
-  showSuccess() {
-    this.messageService.showToast({
-      severity: 'success',
-      summary: 'Succès!',
-      key: 'bc',
-      detail: "L'utilisateur a été ajouté avec succès",
-    });
-  }
-  onSubmit() {
-    this.isLoading = true;
-    this.authService.signup(this.employeeForm.value).subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        this.showSuccess();
+    isLoading: boolean = false;
+    roles = ['Manager', 'Employé', 'Client'];
+    showError() {
+        this.messageService.showToast({
+            severity: 'error',
+            summary: 'Oops !',
+            key: 'bc',
+            detail: "Une erreur s'est produite, veuillez réessayer plus tard",
+        });
+    }
+    showSuccess() {
+        this.messageService.showToast({
+            severity: 'success',
+            summary: 'Succès!',
+            key: 'bc',
+            detail: "L'utilisateur a été ajouté avec succès",
+        });
+    }
+    onSubmit() {
+        this.isLoading = true;
+        this.authService.signup(this.employeeForm.value).subscribe({
+            next: (data) => {
+                this.isLoading = false;
+                this.showSuccess();
 
-        console.log(data);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.log(err);
-        this.showError();
-      },
-    });
-  }
+                console.log(data);
+            },
+            error: (err) => {
+                this.isLoading = false;
+                console.log(err);
+                this.showError();
+            },
+        });
+    }
 }

@@ -9,25 +9,29 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { LeavesComponent } from './leaves/leaves.component';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'services', component: ProductsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  {
-    path: 'admin',
-    component: BoardAdminComponent,
-    children: [
-      { path: 'list', component: CardListComponent, outlet: 'adminoutlet' },
-      {
-        path: 'add-employee',
-        component: AddEmployeeComponent,
-        outlet: 'adminoutlet',
-      },
-      {
-        path: 'leave',
-        component: LeavesComponent,
-        outlet: 'adminoutlet',
-      },
-    ],
-  },
+    { path: 'home', component: HomeComponent },
+    { path: 'services', component: ProductsComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent },
+    {
+        path: 'admin',
+        component: BoardAdminComponent,
+        children: [
+            {
+                path: 'list',
+                component: CardListComponent,
+                outlet: 'adminoutlet',
+            },
+            {
+                path: 'add-employee',
+                component: AddEmployeeComponent,
+                outlet: 'adminoutlet',
+            },
+            {
+                path: 'leave',
+                component: LeavesComponent,
+                outlet: 'adminoutlet',
+            },
+        ],
+    },
 ];

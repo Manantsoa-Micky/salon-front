@@ -7,19 +7,19 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 
 @Component({
-  selector: 'app-board-admin',
-  standalone: true,
-  templateUrl: './board-admin.component.html',
-  styleUrl: './board-admin.component.css',
-  imports: [
-    CalendarModule,
-    AvatarModule,
-    HeaderComponent,
-    CardListComponent,
-    RouterOutlet,
-    SidebarComponent,
-  ],
+    selector: 'app-board-admin',
+    standalone: true,
+    templateUrl: './board-admin.component.html',
+    styleUrl: './board-admin.component.css',
+    imports: [
+        CalendarModule,
+        AvatarModule,
+        HeaderComponent,
+        CardListComponent,
+        RouterOutlet,
+        SidebarComponent,
+    ],
 })
 export class BoardAdminComponent {
-  constructor() {}
+    constructor() {}
 }

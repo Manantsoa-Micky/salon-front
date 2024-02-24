@@ -4,9 +4,9 @@ import { Message, MessageService } from 'primeng/api';
 
 @Injectable({ providedIn: 'root' })
 export class AppMessageService {
-  constructor(private messageService: MessageService) {}
+    constructor(private messageService: MessageService) {}
 
-  showToast(message: Message) {
-    this.messageService.add(message);
-  }
+    showToast(message: Message) {
+        this.messageService.add(message);
+    }
 }

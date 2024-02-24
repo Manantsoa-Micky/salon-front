@@ -9,11 +9,11 @@ import { MessageService } from 'primeng/api';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes),
-    provideHttpClient(withInterceptors([httpRequestInterceptor])),
-    provideStore(),
-    provideAnimationsAsync(),
-    MessageService,
-  ],
+    providers: [
+        provideRouter(routes),
+        provideHttpClient(withInterceptors([httpRequestInterceptor])),
+        provideStore(),
+        provideAnimationsAsync(),
+        MessageService,
+    ],
 };
