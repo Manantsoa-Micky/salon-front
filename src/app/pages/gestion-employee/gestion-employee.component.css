@@ -1,0 +1,25 @@
+.top-part{
+    display: flex;
+    gap: 3rem;
+    align-items: baseline;
+    margin-left: 30px;
+}
+
+.search-part{
+    margin-top: 15px;
+    width: 80%;
+}
+
+.bottom-part{
+    width: 80%;
+    padding: 20px;
+}
+
+th{
+    font-size: large;
+}
+
+td{
+    height: 75px;
+    cursor: pointer;
+}

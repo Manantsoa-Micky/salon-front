@@ -56,5 +56,10 @@ export class SidebarComponent {
             label: 'Statistiques',
             route: 'leave',
         },
+        {
+            icon: 'dashboard',
+            label: 'Modérations',
+            route: 'leave',
+        },
     ]);
 }

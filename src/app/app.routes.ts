@@ -4,10 +4,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { ProductsComponent } from './products/products.component';
-import { CardListComponent } from './components/card-list/card-list.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { LeavesComponent } from './leaves/leaves.component';
-import { EmployeeTableComponent } from './employee-table/employee-table.component';
+import { GestionEmployeeComponent } from './pages/gestion-employee/gestion-employee.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -20,7 +19,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'list',
-                component: EmployeeTableComponent,
+                component: GestionEmployeeComponent,
                 outlet: 'adminoutlet',
             },
             {
