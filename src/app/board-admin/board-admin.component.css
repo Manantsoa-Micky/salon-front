@@ -1,2 +1,23 @@
+.c-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
 
+.c-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
 
+.content {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+.right{
+    border: 1px solid red;
+    width: 100%;
+    overflow: scroll;
+}

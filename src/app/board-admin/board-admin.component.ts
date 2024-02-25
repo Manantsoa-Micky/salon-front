@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { CalendarModule } from 'primeng/calendar';
-import { AvatarModule } from 'primeng/avatar';
 import { HeaderComponent } from '../components/header/header.component';
 import { CardListComponent } from '../components/card-list/card-list.component';
 import { RouterOutlet } from '@angular/router';
@@ -12,8 +10,6 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
     templateUrl: './board-admin.component.html',
     styleUrl: './board-admin.component.css',
     imports: [
-        CalendarModule,
-        AvatarModule,
         HeaderComponent,
         CardListComponent,
         RouterOutlet,

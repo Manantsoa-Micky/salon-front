@@ -7,6 +7,7 @@ import { ProductsComponent } from './products/products.component';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { LeavesComponent } from './leaves/leaves.component';
+import { EmployeeTableComponent } from './employee-table/employee-table.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -19,7 +20,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'list',
-                component: CardListComponent,
+                component: EmployeeTableComponent,
                 outlet: 'adminoutlet',
             },
             {

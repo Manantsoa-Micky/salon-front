@@ -1,12 +1,10 @@
-<div class="flex-col flex h-screen">
-    <div class="mb-5 bg-blue-400 sticky top-0 z-50">
+<div class="c-container">
+    <div class="c-header">
         <app-header></app-header>
     </div>
-    <div class="flex h-[100%] overflow-hidden">
+    <div class="content">
         <app-sidebar></app-sidebar>
-        <div
-            class="border border-red-400 w-full overflow-scroll scrollbar-hide"
-        >
+        <div class="right scrollbar-hide">
             <router-outlet name="adminoutlet" />
         </div>
     </div>
