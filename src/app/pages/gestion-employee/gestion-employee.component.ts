@@ -7,6 +7,7 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export interface EmployeeData {
     matricule: string;
@@ -65,6 +66,7 @@ const ELEMENT_DATA: EmployeeData[] = [
         MatTableModule,
         MatPaginator,
         MatPaginatorModule,
+        MatTabsModule,
     ],
     templateUrl: './gestion-employee.component.html',
     styleUrl: './gestion-employee.component.css',

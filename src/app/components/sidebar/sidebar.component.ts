@@ -38,7 +38,7 @@ export class SidebarComponent {
     menuItems = signal<MenuItem[]>([
         {
             icon: 'dashboard',
-            label: 'Employés',
+            label: 'Salarié(e)s',
             route: 'list',
         },
         {

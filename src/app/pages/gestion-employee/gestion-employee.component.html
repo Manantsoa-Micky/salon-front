@@ -1,12 +1,12 @@
 <div class="top-part">
-    <h1 style="margin-top: 10px">Gestion des Employés</h1>
+    <h1 style="margin-top: 10px">Gestion du personnel</h1>
     <div class="search-part">
         <mat-form-field appearance="outline">
             <mat-icon matPrefix>search</mat-icon>
             <mat-label>Rechercher</mat-label>
             <input
                 matInput
-                placeholder="Ex: Nom d'un employé"
+                placeholder="Ex: Nom d'un salarié"
                 autocomplete="false"
             />
         </mat-form-field>
@@ -14,30 +14,51 @@
 </div>
 <mat-divider></mat-divider>
 <div class="bottom-part">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
-        <ng-container matColumnDef="matricule">
-            <th mat-header-cell *matHeaderCellDef>Matricule</th>
-            <td mat-cell *matCellDef="let element">{{ element.matricule }}</td>
-        </ng-container>
-        <ng-container matColumnDef="nom">
-            <th mat-header-cell *matHeaderCellDef>Nom</th>
-            <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
-        </ng-container>
-        <ng-container matColumnDef="poste">
-            <th mat-header-cell *matHeaderCellDef>Poste</th>
-            <td mat-cell *matCellDef="let element">{{ element.poste }}</td>
-        </ng-container>
-        <ng-container matColumnDef="statut">
-            <th mat-header-cell *matHeaderCellDef>Statut</th>
-            <td mat-cell *matCellDef="let element">{{ element.statut }}</td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-    <mat-paginator
-        [pageSizeOptions]="[5, 10, 20]"
-        showFirstLastButtons
-        aria-label="Select page of periodic elements"
-    >
-    </mat-paginator>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Tous les salariés"
+            ><table
+                mat-table
+                [dataSource]="dataSource"
+                class="mat-elevation-z1"
+            >
+                <ng-container matColumnDef="matricule">
+                    <th mat-header-cell *matHeaderCellDef>Matricule</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.matricule }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="nom">
+                    <th mat-header-cell *matHeaderCellDef>Nom</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.nom }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="poste">
+                    <th mat-header-cell *matHeaderCellDef>Poste</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.poste }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="statut">
+                    <th mat-header-cell *matHeaderCellDef>Statut</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.statut }}
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements"
+            >
+            </mat-paginator
+        ></mat-tab>
+        <mat-tab label="Ajout d'un salarié">Content 2</mat-tab>
+        <mat-tab label="Planning">Content 3</mat-tab>
+    </mat-tab-group>
 </div>

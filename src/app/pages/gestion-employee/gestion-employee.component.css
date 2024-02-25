@@ -11,10 +11,12 @@
 }
 
 .bottom-part{
-    width: 80%;
+
     padding: 20px;
 }
-
+table{
+    margin-top: 50px;
+}
 th{
     font-size: large;
 }
@@ -23,3 +25,4 @@ td{
     height: 75px;
     cursor: pointer;
 }
+
