@@ -8,6 +8,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../_services/auth.service';
 
 export interface EmployeeData {
     matricule: string;
@@ -72,18 +74,41 @@ const ELEMENT_DATA: EmployeeData[] = [
     styleUrl: './gestion-employee.component.css',
 })
 export class GestionEmployeeComponent implements AfterViewInit {
-    constructor(private _liveAnnouncer: LiveAnnouncer) {}
+    constructor(
+        private _liveAnnouncer: LiveAnnouncer,
+        private fb: FormBuilder,
+        private authService: AuthService
+    ) {}
+
     displayedColumns: string[] = ['matricule', 'nom', 'poste', 'statut'];
     dataSource = new MatTableDataSource(ELEMENT_DATA);
     @ViewChild(MatSort)
     sort!: MatSort;
     @ViewChild(MatPaginator)
     paginator!: MatPaginator;
+    isLoading: boolean = false;
+    hide: boolean = true;
+    employeeForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        username: ['', Validators.required],
+        adress: ['', Validators.required],
+        role: ['', Validators.required],
+        phone: ['', Validators.required],
+        salary: ['', Validators.required],
+        hours: this.fb.group({
+            begin: ['', Validators.required],
+            end: ['', Validators.required],
+        }),
+    });
 
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
+
     announceSortChange(sortState: Sort) {
         if (sortState.direction) {
             this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -91,4 +116,20 @@ export class GestionEmployeeComponent implements AfterViewInit {
             this._liveAnnouncer.announce('Sorting cleared');
         }
     }
+
+    onSubmit() {
+        this.isLoading = true;
+        this.authService.signup(this.employeeForm.value).subscribe({
+            next: (data) => {
+                this.isLoading = false;
+
+                console.log(data);
+            },
+            error: (err) => {
+                this.isLoading = false;
+                console.log(err);
+            },
+        });
+    }
+    getErrorMessage() {}
 }

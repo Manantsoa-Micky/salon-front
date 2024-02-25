@@ -15,7 +15,7 @@
 <mat-divider></mat-divider>
 <div class="bottom-part">
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab label="Tous les salariés"
+        <!-- <mat-tab label="Tous les salariés"
             ><table
                 mat-table
                 [dataSource]="dataSource"
@@ -57,8 +57,88 @@
                 aria-label="Select page of periodic elements"
             >
             </mat-paginator
-        ></mat-tab>
-        <mat-tab label="Ajout d'un salarié">Content 2</mat-tab>
+        ></mat-tab> -->
+        <mat-tab label="Ajout d'un salarié">
+            <form formGroupName="employeeForm" (ngSubmit)="onSubmit()">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nom</mat-label>
+                        <input
+                            matInput
+                            placeholder="Nom*"
+                            formControlName="firstName"
+                        />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Prénom</mat-label>
+                        <input
+                            matInput
+                            placeholder="Prénom*"
+                            formControlName="lastName"
+                        />
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input
+                        matInput
+                        placeholder="pat@example.com"
+                        formControlName="email"
+                        required
+                    />
+                    <!-- @if (employeeForm.invalid) {
+                      <mat-error>{{getErrorMessage()}}</mat-error>
+                    } -->
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mot de Passe</mat-label>
+                    <mat-icon matSuffix onclick="">{{
+                        hide ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <input matInput [type]="hide ? 'password' : 'text'" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirmer le mot de passe</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" />
+                </mat-form-field>
+                <input
+                    placeholder="Nom d'Utilisateur*"
+                    formControlName="username"
+                    name="username"
+                />
+                <input
+                    placeholder="Adresse*"
+                    formControlName="adress"
+                    name="adress"
+                />
+                <div class="flex justify-content-start gap-2">
+                    <input
+                        formControlName="phone"
+                        placeholder="(+261) 34 334 00*"
+                        name="phone"
+                    />
+                    <select
+                        formControlName="role"
+                        placeholder="Choisir un Rôle*"
+                        name="role"
+                    ></select>
+                    <input
+                        formControlName="salary"
+                        placeholder="Ar Salaire*"
+                        name="salary"
+                    />
+                    />
+                </div>
+                <div formGroupName="hours" class="flex justify-content-start">
+                    <input formControlName="begin" placeholder="08h00*" />
+                    <p class="p-3">à</p>
+                    <input formControlName="end" placeholder="17h00*" />
+                </div>
+                <button type="submit">Ajouter</button>
+            </form>
+        </mat-tab>
         <mat-tab label="Planning">Content 3</mat-tab>
     </mat-tab-group>
 </div>
