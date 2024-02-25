@@ -13,8 +13,7 @@ import { AuthService } from '../_services/auth.service';
 export class AddEmployeeComponent {
     constructor(
         private formBuilder: FormBuilder,
-        private authService: AuthService,
-        private injector: Injector
+        private authService: AuthService
     ) {}
     employeeForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
