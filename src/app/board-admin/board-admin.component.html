@@ -1,11 +1,18 @@
+<!-- @for (tile of tiles; track tile) {
+    <mat-grid-tile
+        [colspan]="tile.cols"
+        [rowspan]="tile.rows"
+        [style.background]="tile.color"
+        >{{ tile.text }}</mat-grid-tile
+    >
+    } -->
+
 <div class="c-container">
-    <div class="c-header">
-        <app-header></app-header>
-    </div>
-    <div class="content">
-        <app-sidebar></app-sidebar>
-        <div class="right scrollbar-hide">
-            <router-outlet name="adminoutlet" />
-        </div>
-    </div>
+    <app-header></app-header>
+    <mat-drawer-container class="sidebar">
+        <mat-drawer mode="side" opened><app-sidebar></app-sidebar></mat-drawer>
+        <mat-drawer-content
+            ><router-outlet name="adminoutlet"
+        /></mat-drawer-content>
+    </mat-drawer-container>
 </div>

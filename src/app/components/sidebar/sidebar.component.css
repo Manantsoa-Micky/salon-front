@@ -1,10 +1,27 @@
-.test{
-  padding: 10px;
-  border-radius: 5px;
-  display: block;
+.sidenav-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
 }
 
-.test:hover {
-  background-color: rgb(235, 235, 235);
-  cursor: pointer;
+.image{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.sidenav-header > h2 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.sidenav-header > p {
+    margin: 0;
+    font-size: 0.8rem;
+    margin-bottom: 50px;
 }
