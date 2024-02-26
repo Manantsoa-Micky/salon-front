@@ -10,14 +10,17 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
+import { UserService } from '../../_services/user.service';
 
 export interface EmployeeData {
+    _id: string;
     matricule: string;
-    nom: string;
+    firstName: string;
+    lastName: string;
     poste: string;
     statut: string;
 }
@@ -26,45 +29,6 @@ interface Role {
     nom: string;
     ref: string;
 }
-
-const ELEMENT_DATA: EmployeeData[] = [
-    {
-        matricule: 'Mat-0001',
-        nom: 'Randria koto',
-        poste: 'Manager',
-        statut: 'Actif',
-    },
-    {
-        matricule: 'Mat-0001',
-        nom: 'Randria koto',
-        poste: 'Manager',
-        statut: 'Actif',
-    },
-    {
-        matricule: 'Mat-0001',
-        nom: 'Randria koto',
-        poste: 'Manager',
-        statut: 'Actif',
-    },
-    {
-        matricule: 'Mat-0001',
-        nom: 'Randria koto',
-        poste: 'Manager',
-        statut: 'Actif',
-    },
-    {
-        matricule: 'Mat-0001',
-        nom: 'Randria koto',
-        poste: 'Manager',
-        statut: 'Actif',
-    },
-    {
-        matricule: 'Mat-0001',
-        nom: 'Randria koto',
-        poste: 'Manager',
-        statut: 'Actif',
-    },
-];
 
 @Component({
     selector: 'app-gestion-employee',
@@ -90,10 +54,21 @@ export class GestionEmployeeComponent implements AfterViewInit {
         private _liveAnnouncer: LiveAnnouncer,
         private fb: FormBuilder,
         private authService: AuthService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private userService: UserService
     ) {}
 
-    displayedColumns: string[] = ['matricule', 'nom', 'poste', 'statut'];
+    USER_DATA$!: MatTableDataSource<any>;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
+
+    displayedColumns: string[] = [
+        'matricule',
+        'nom',
+        'poste',
+        'statut',
+        'actions',
+    ];
     roles: Role[] = [
         {
             nom: 'Manager',
@@ -104,11 +79,6 @@ export class GestionEmployeeComponent implements AfterViewInit {
             ref: 'salarié',
         },
     ];
-    dataSource = new MatTableDataSource(ELEMENT_DATA);
-    @ViewChild(MatSort)
-    sort!: MatSort;
-    @ViewChild(MatPaginator)
-    paginator!: MatPaginator;
     isLoading: boolean = false;
     hide: boolean = true;
     employeeForm = this.fb.group({
@@ -127,9 +97,32 @@ export class GestionEmployeeComponent implements AfterViewInit {
         }),
     });
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    ngAfterViewInit(): void {
+        this.userService.getAllUsers().subscribe((userList: any) => {
+            this.USER_DATA$ = new MatTableDataSource(userList.users);
+            this.USER_DATA$.paginator = this.paginator;
+            this.USER_DATA$.sort = this.sort;
+        });
+
+        /** In case i change my mind */
+
+        // const employee_data = sessionStorage.getItem('employee_data');
+        // if (employee_data) {
+        //     const test = JSON.parse(employee_data);
+        //     this.USER_DATA$ = new MatTableDataSource(test);
+        //     this.USER_DATA$.paginator = this.paginator;
+        //     this.USER_DATA$.sort = this.sort;
+        // } else {
+        //     this.userService.getAllUsers().subscribe((userList: any) => {
+        //         this.USER_DATA$ = new MatTableDataSource(userList.users);
+        //         this.USER_DATA$.paginator = this.paginator;
+        //         this.USER_DATA$.sort = this.sort;
+        //         sessionStorage.setItem(
+        //             'employee_data',
+        //             JSON.stringify(userList.users)
+        //         );
+        //     });
+        // }
     }
 
     announceSortChange(sortState: Sort) {
@@ -155,11 +148,16 @@ export class GestionEmployeeComponent implements AfterViewInit {
         });
     }
     getErrorMessage() {}
-    openDialog() {
-        const dialogRef = this.dialog.open(DialogComponent);
-
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+    openDialog(userId: string) {
+        this.userService.getUserById(userId).subscribe((data) => {
+            const dialogRef = this.dialog.open(DialogComponent, {
+                data: data,
+                width: '25%',
+            });
+            dialogRef.afterClosed().subscribe((result) => {
+                console.log(`Dialog result: ${result}`);
+            });
         });
     }
+    deleteUser(userId: string) {}
 }

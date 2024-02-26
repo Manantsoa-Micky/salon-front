@@ -52,3 +52,8 @@ form{
 .full-width-input{
     width: 100%;
 }
+.button-actions{
+    display: flex;
+    gap: 1rem;
+}
+
