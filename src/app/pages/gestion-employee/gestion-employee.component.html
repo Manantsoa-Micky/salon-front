@@ -4,18 +4,14 @@
         <mat-form-field appearance="outline">
             <mat-icon matPrefix>search</mat-icon>
             <mat-label>Rechercher</mat-label>
-            <input
-                matInput
-                placeholder="Ex: Nom d'un salarié"
-                autocomplete="false"
-            />
+            <input matInput placeholder="Ex: Nom d'un salarié" />
         </mat-form-field>
     </div>
 </div>
 <mat-divider></mat-divider>
 <div class="bottom-part">
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <!-- <mat-tab label="Tous les salariés"
+        <mat-tab label="Tous les salariés"
             ><table
                 mat-table
                 [dataSource]="dataSource"
@@ -57,86 +53,173 @@
                 aria-label="Select page of periodic elements"
             >
             </mat-paginator
-        ></mat-tab> -->
+        ></mat-tab>
         <mat-tab label="Ajout d'un salarié">
-            <form formGroupName="employeeForm" (ngSubmit)="onSubmit()">
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Nom</mat-label>
+            <form
+                formGroupName="employeeForm"
+                (ngSubmit)="onSubmit()"
+                class="ajout"
+            >
+                <div class="form-left-side">
+                    <div class="name-row">
+                        <mat-form-field
+                            appearance="outline"
+                            class="full-width-input"
+                        >
+                            <mat-label>Nom</mat-label>
+                            <input
+                                matInput
+                                required
+                                formControlName="firstName"
+                            />
+                        </mat-form-field>
+
+                        <mat-form-field
+                            appearance="outline"
+                            class="full-width-input"
+                        >
+                            <mat-label>Prénom</mat-label>
+                            <input
+                                matInput
+                                required
+                                formControlName="lastName"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Email</mat-label>
                         <input
                             matInput
-                            placeholder="Nom*"
-                            formControlName="firstName"
+                            placeholder="pat@example.com"
+                            formControlName="email"
+                            required
                         />
                     </mat-form-field>
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Prénom</mat-label>
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Mot de Passe</mat-label>
+                        <input matInput [type]="'password'" />
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Confirmer le mot de passe</mat-label>
+                        <input matInput [type]="'password'" />
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Nom d'utilisateur</mat-label>
                         <input
                             matInput
-                            placeholder="Prénom*"
-                            formControlName="lastName"
+                            placeholder="Ex: Obelisk2000"
+                            formControlName="username"
                         />
                     </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Adresse</mat-label>
+                        <input
+                            matInput
+                            required
+                            placeholder="Ex: Lot II V 132 Anosy"
+                            formControlName="adress"
+                        />
+                    </mat-form-field>
+                    <button
+                        mat-stroked-button
+                        style="
+                            height: 60px;
+                            color: white;
+                            background-color: dodgerblue;
+                            width: 100%;
+                            font-size: large;
+                        "
+                    >
+                        Ajouter un salarié
+                    </button>
                 </div>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input
-                        matInput
-                        placeholder="pat@example.com"
-                        formControlName="email"
-                        required
-                    />
-                    <!-- @if (employeeForm.invalid) {
-                      <mat-error>{{getErrorMessage()}}</mat-error>
-                    } -->
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Mot de Passe</mat-label>
-                    <mat-icon matSuffix onclick="">{{
-                        hide ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                    <input matInput [type]="hide ? 'password' : 'text'" />
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Confirmer le mot de passe</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" />
-                </mat-form-field>
-                <input
-                    placeholder="Nom d'Utilisateur*"
-                    formControlName="username"
-                    name="username"
-                />
-                <input
-                    placeholder="Adresse*"
-                    formControlName="adress"
-                    name="adress"
-                />
-                <div class="flex justify-content-start gap-2">
-                    <input
-                        formControlName="phone"
-                        placeholder="(+261) 34 334 00*"
-                        name="phone"
-                    />
-                    <select
-                        formControlName="role"
-                        placeholder="Choisir un Rôle*"
-                        name="role"
-                    ></select>
-                    <input
-                        formControlName="salary"
-                        placeholder="Ar Salaire*"
-                        name="salary"
-                    />
-                    />
+                <div class="form-right-side">
+                    <div class="flex justify-content-start gap-2">
+                        <mat-form-field
+                            appearance="outline"
+                            class="full-width-input"
+                        >
+                            <mat-label>Numéro</mat-label>
+                            <input
+                                matInput
+                                required
+                                type="tel"
+                                matInput
+                                placeholder="Ex: 034-68-929-30"
+                                formControlName="phone"
+                            />
+                        </mat-form-field>
+                        <mat-form-field
+                            floatLabel="always"
+                            appearance="outline"
+                            class="full-width-input"
+                        >
+                            <mat-label>Salaire</mat-label>
+                            <input
+                                matInput
+                                type="number"
+                                required
+                                formControlName="salary"
+                            />
+                            <span matTextPrefix>MGA&nbsp;</span>
+                        </mat-form-field>
+                    </div>
+                    <div formGroupName="hours" class="heure-container">
+                        <mat-form-field
+                            appearance="outline"
+                            class="full-width-input"
+                            required
+                        >
+                            <mat-label>Heure début</mat-label>
+                            <input
+                                matInput
+                                type="number"
+                                required
+                                formControlName="begin"
+                            />
+                        </mat-form-field>
+                        <p class="p-3">à</p>
+                        <mat-form-field
+                            appearance="outline"
+                            class="full-width-input"
+                        >
+                            <mat-label>Heure fin</mat-label>
+                            <input
+                                matInput
+                                type="number"
+                                required
+                                formControlName="end"
+                                autocomplete="false"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="outline" required>
+                        <mat-label>Rôle</mat-label>
+                        <mat-select>
+                            @for (role of roles; track role) {
+                            <mat-option [value]="role.ref">{{
+                                role.nom
+                            }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
                 </div>
-                <div formGroupName="hours" class="flex justify-content-start">
-                    <input formControlName="begin" placeholder="08h00*" />
-                    <p class="p-3">à</p>
-                    <input formControlName="end" placeholder="17h00*" />
-                </div>
-                <button type="submit">Ajouter</button>
             </form>
         </mat-tab>
         <mat-tab label="Planning">Content 3</mat-tab>

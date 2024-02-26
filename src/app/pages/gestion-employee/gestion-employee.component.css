@@ -26,3 +26,29 @@ td{
     cursor: pointer;
 }
 
+.heure-container{
+    display: flex;
+}
+.heure-container > p {
+    margin: 20px;
+}
+
+.ajout{
+    width: 50%;
+    display: flex;
+    gap: 1rem;
+}
+
+form{
+    padding-top: 50px;
+}
+
+.name-row{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+.full-width-input{
+    width: 100%;
+}

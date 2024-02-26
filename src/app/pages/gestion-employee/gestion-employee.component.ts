@@ -7,15 +7,24 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 export interface EmployeeData {
     matricule: string;
     nom: string;
     poste: string;
     statut: string;
+}
+
+interface Role {
+    nom: string;
+    ref: string;
 }
 
 const ELEMENT_DATA: EmployeeData[] = [
@@ -69,6 +78,9 @@ const ELEMENT_DATA: EmployeeData[] = [
         MatPaginator,
         MatPaginatorModule,
         MatTabsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatDialogModule,
     ],
     templateUrl: './gestion-employee.component.html',
     styleUrl: './gestion-employee.component.css',
@@ -77,10 +89,21 @@ export class GestionEmployeeComponent implements AfterViewInit {
     constructor(
         private _liveAnnouncer: LiveAnnouncer,
         private fb: FormBuilder,
-        private authService: AuthService
+        private authService: AuthService,
+        public dialog: MatDialog
     ) {}
 
     displayedColumns: string[] = ['matricule', 'nom', 'poste', 'statut'];
+    roles: Role[] = [
+        {
+            nom: 'Manager',
+            ref: 'manager',
+        },
+        {
+            nom: 'Salarié',
+            ref: 'salarié',
+        },
+    ];
     dataSource = new MatTableDataSource(ELEMENT_DATA);
     @ViewChild(MatSort)
     sort!: MatSort;
@@ -132,4 +155,11 @@ export class GestionEmployeeComponent implements AfterViewInit {
         });
     }
     getErrorMessage() {}
+    openDialog() {
+        const dialogRef = this.dialog.open(DialogComponent);
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(`Dialog result: ${result}`);
+        });
+    }
 }
