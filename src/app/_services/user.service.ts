@@ -29,4 +29,7 @@ export class UserService {
     getUserById(userId: string): Observable<unknown> {
         return this.http.get(`${USER_API}/get/${userId}`);
     }
+    deleteOneUser(userId: string): Observable<unknown> {
+        return this.http.get(`${USER_API}/delete/${userId}`);
+    }
 }

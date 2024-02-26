@@ -15,6 +15,7 @@ import { AuthService } from '../../_services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { UserService } from '../../_services/user.service';
+import { concatMap } from 'rxjs';
 
 export interface EmployeeData {
     _id: string;
@@ -103,26 +104,6 @@ export class GestionEmployeeComponent implements AfterViewInit {
             this.USER_DATA$.paginator = this.paginator;
             this.USER_DATA$.sort = this.sort;
         });
-
-        /** In case i change my mind */
-
-        // const employee_data = sessionStorage.getItem('employee_data');
-        // if (employee_data) {
-        //     const test = JSON.parse(employee_data);
-        //     this.USER_DATA$ = new MatTableDataSource(test);
-        //     this.USER_DATA$.paginator = this.paginator;
-        //     this.USER_DATA$.sort = this.sort;
-        // } else {
-        //     this.userService.getAllUsers().subscribe((userList: any) => {
-        //         this.USER_DATA$ = new MatTableDataSource(userList.users);
-        //         this.USER_DATA$.paginator = this.paginator;
-        //         this.USER_DATA$.sort = this.sort;
-        //         sessionStorage.setItem(
-        //             'employee_data',
-        //             JSON.stringify(userList.users)
-        //         );
-        //     });
-        // }
     }
 
     announceSortChange(sortState: Sort) {
@@ -159,5 +140,14 @@ export class GestionEmployeeComponent implements AfterViewInit {
             });
         });
     }
-    deleteUser(userId: string) {}
+    deleteUser(userId: string) {
+        this.userService
+            .deleteOneUser(userId)
+            .pipe(concatMap(() => this.userService.getAllUsers()))
+            .subscribe((userList: any) => {
+                this.USER_DATA$ = new MatTableDataSource(userList.users);
+                this.USER_DATA$.paginator = this.paginator;
+                this.USER_DATA$.sort = this.sort;
+            });
+    }
 }
