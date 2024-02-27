@@ -4,7 +4,11 @@
         <mat-form-field appearance="outline">
             <mat-icon matPrefix>search</mat-icon>
             <mat-label>Rechercher</mat-label>
-            <input matInput placeholder="Ex: Nom d'un salarié" />
+            <input
+                matInput
+                placeholder="Ex: Nom d'un salarié"
+                (change)="searchUser($event)"
+            />
         </mat-form-field>
     </div>
 </div>
@@ -76,36 +80,26 @@
         ></mat-tab>
         <mat-tab label="Ajout d'un salarié">
             <form
-                formGroupName="employeeForm"
-                (ngSubmit)="onSubmit()"
+                id="userForm"
+                [formGroup]="employeeForm"
+                (ngSubmit)="addUser()"
                 class="ajout"
             >
-                <div class="form-left-side">
-                    <div class="name-row">
-                        <mat-form-field
-                            appearance="outline"
-                            class="full-width-input"
-                        >
-                            <mat-label>Nom</mat-label>
-                            <input
-                                matInput
-                                required
-                                formControlName="firstName"
-                            />
-                        </mat-form-field>
-
-                        <mat-form-field
-                            appearance="outline"
-                            class="full-width-input"
-                        >
-                            <mat-label>Prénom</mat-label>
-                            <input
-                                matInput
-                                required
-                                formControlName="lastName"
-                            />
-                        </mat-form-field>
-                    </div>
+                <div style="display: flex; flex-direction: column; width: 50%">
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Nom</mat-label>
+                        <input matInput required formControlName="firstName" />
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="full-width-input"
+                    >
+                        <mat-label>Prénom</mat-label>
+                        <input matInput required formControlName="lastName" />
+                    </mat-form-field>
 
                     <mat-form-field
                         appearance="outline"
@@ -124,14 +118,11 @@
                         class="full-width-input"
                     >
                         <mat-label>Mot de Passe</mat-label>
-                        <input matInput [type]="'password'" />
-                    </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
-                        <mat-label>Confirmer le mot de passe</mat-label>
-                        <input matInput [type]="'password'" />
+                        <input
+                            matInput
+                            [type]="'password'"
+                            formControlName="password"
+                        />
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
@@ -144,6 +135,8 @@
                             formControlName="username"
                         />
                     </mat-form-field>
+                </div>
+                <div style="display: flex; flex-direction: column">
                     <mat-form-field
                         appearance="outline"
                         class="full-width-input"
@@ -153,24 +146,11 @@
                             matInput
                             required
                             placeholder="Ex: Lot II V 132 Anosy"
-                            formControlName="adress"
+                            formControlName="address"
                         />
                     </mat-form-field>
-                    <button
-                        mat-stroked-button
-                        style="
-                            height: 60px;
-                            color: white;
-                            background-color: dodgerblue;
-                            width: 100%;
-                            font-size: large;
-                        "
-                    >
-                        Ajouter un salarié
-                    </button>
-                </div>
-                <div class="form-right-side">
-                    <div class="flex justify-content-start gap-2">
+
+                    <div class="form-right-side">
                         <mat-form-field
                             appearance="outline"
                             class="full-width-input"
@@ -182,7 +162,7 @@
                                 type="tel"
                                 matInput
                                 placeholder="Ex: 034-68-929-30"
-                                formControlName="phone"
+                                formControlName="phoneNumber"
                             />
                         </mat-form-field>
                         <mat-form-field
@@ -209,12 +189,12 @@
                             <mat-label>Heure début</mat-label>
                             <input
                                 matInput
-                                type="number"
+                                type="text"
                                 required
                                 formControlName="begin"
                             />
                         </mat-form-field>
-                        <p class="p-3">à</p>
+                        <p>à</p>
                         <mat-form-field
                             appearance="outline"
                             class="full-width-input"
@@ -222,16 +202,15 @@
                             <mat-label>Heure fin</mat-label>
                             <input
                                 matInput
-                                type="number"
+                                type="text"
                                 required
                                 formControlName="end"
-                                autocomplete="false"
                             />
                         </mat-form-field>
                     </div>
                     <mat-form-field appearance="outline" required>
                         <mat-label>Rôle</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="role">
                             @for (role of roles; track role) {
                             <mat-option [value]="role.ref">{{
                                 role.nom
@@ -239,6 +218,7 @@
                             }
                         </mat-select>
                     </mat-form-field>
+                    <button type="submit" mat-stroked-button>Ajouter</button>
                 </div>
             </form>
         </mat-tab>

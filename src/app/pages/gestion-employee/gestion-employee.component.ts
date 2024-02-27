@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -46,6 +46,7 @@ interface Role {
         MatSelectModule,
         MatButtonModule,
         MatDialogModule,
+        ReactiveFormsModule,
     ],
     templateUrl: './gestion-employee.component.html',
     styleUrl: './gestion-employee.component.css',
@@ -62,6 +63,7 @@ export class GestionEmployeeComponent implements AfterViewInit {
     USER_DATA$!: MatTableDataSource<any>;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+    searchText = this.fb.nonNullable.control('');
 
     displayedColumns: string[] = [
         'matricule',
@@ -88,9 +90,9 @@ export class GestionEmployeeComponent implements AfterViewInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         username: ['', Validators.required],
-        adress: ['', Validators.required],
+        address: ['', Validators.required],
         role: ['', Validators.required],
-        phone: ['', Validators.required],
+        phoneNumber: ['', Validators.required],
         salary: ['', Validators.required],
         hours: this.fb.group({
             begin: ['', Validators.required],
@@ -114,30 +116,31 @@ export class GestionEmployeeComponent implements AfterViewInit {
         }
     }
 
-    onSubmit() {
-        this.isLoading = true;
-        this.authService.signup(this.employeeForm.value).subscribe({
-            next: (data) => {
-                this.isLoading = false;
-
-                console.log(data);
-            },
-            error: (err) => {
-                this.isLoading = false;
-                console.log(err);
-            },
-        });
+    addUser() {
+        if (this.employeeForm.errors) {
+            console.log(this.employeeForm.value);
+        } else {
+            console.log(this.employeeForm.value);
+            this.authService.signup(this.employeeForm.value).subscribe({
+                next: (data) => {
+                    this.isLoading = false;
+                    console.log(data);
+                },
+                error: (err) => {
+                    this.isLoading = false;
+                    console.log(err);
+                },
+            });
+        }
     }
     getErrorMessage() {}
     openDialog(userId: string) {
         this.userService.getUserById(userId).subscribe((data) => {
-            console.log(data);
-
             const dialogRef = this.dialog.open(DialogComponent, {
                 data: data,
                 width: '600px',
             });
-            dialogRef.afterClosed().subscribe((result) => {
+            dialogRef.afterClosed().subscribe(() => {
                 this.userService.getAllUsers().subscribe((userList: any) => {
                     this.USER_DATA$ = new MatTableDataSource(userList.users);
                     this.USER_DATA$.paginator = this.paginator;
@@ -155,5 +158,13 @@ export class GestionEmployeeComponent implements AfterViewInit {
                 this.USER_DATA$.paginator = this.paginator;
                 this.USER_DATA$.sort = this.sort;
             });
+    }
+    searchUser(event: any) {
+        const newValue = event.target.value;
+        this.userService.searchUser(newValue).subscribe((userList: any) => {
+            this.USER_DATA$ = new MatTableDataSource(userList);
+            this.USER_DATA$.paginator = this.paginator;
+            this.USER_DATA$.sort = this.sort;
+        });
     }
 }

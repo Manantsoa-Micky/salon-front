@@ -44,4 +44,8 @@ export class UserService {
     updateUser(data: unknown): Observable<unknown> {
         return this.http.post(USER_API + 'update', data, httpOptions);
     }
+
+    searchUser(query: string): Observable<unknown> {
+        return this.http.get(`${USER_API}/search?q=${query}`);
+    }
 }
