@@ -124,11 +124,9 @@ export class GestionEmployeeComponent implements AfterViewInit {
             this.authService.signup(this.employeeForm.value).subscribe({
                 next: (data) => {
                     this.isLoading = false;
-                    console.log(data);
                 },
                 error: (err) => {
                     this.isLoading = false;
-                    console.log(err);
                 },
             });
         }

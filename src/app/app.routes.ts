@@ -9,7 +9,7 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { GestionEmployeeComponent } from './pages/gestion-employee/gestion-employee.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent },
+    { path: '', component: HomeComponent },
     { path: 'services', component: ProductsComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
