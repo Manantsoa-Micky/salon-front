@@ -131,12 +131,18 @@ export class GestionEmployeeComponent implements AfterViewInit {
     getErrorMessage() {}
     openDialog(userId: string) {
         this.userService.getUserById(userId).subscribe((data) => {
+            console.log(data);
+
             const dialogRef = this.dialog.open(DialogComponent, {
                 data: data,
-                width: '25%',
+                width: '600px',
             });
             dialogRef.afterClosed().subscribe((result) => {
-                console.log(`Dialog result: ${result}`);
+                this.userService.getAllUsers().subscribe((userList: any) => {
+                    this.USER_DATA$ = new MatTableDataSource(userList.users);
+                    this.USER_DATA$.paginator = this.paginator;
+                    this.USER_DATA$.sort = this.sort;
+                });
             });
         });
     }

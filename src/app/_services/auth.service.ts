@@ -28,7 +28,7 @@ export class AuthService {
         );
     }
 
-    signup(user: any): Observable<unknown> {
+    signup(user: unknown): Observable<unknown> {
         return this.http
             .post(AUTH_API + 'signup', user, httpOptions)
             .pipe(retry(3), catchError(this.handleError));

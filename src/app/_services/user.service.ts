@@ -1,7 +1,15 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+    HttpClient,
+    HttpErrorResponse,
+    HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { USER_API } from '../constants/const';
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 @Injectable({
     providedIn: 'root',
 })
@@ -31,5 +39,9 @@ export class UserService {
     }
     deleteOneUser(userId: string): Observable<unknown> {
         return this.http.get(`${USER_API}/delete/${userId}`);
+    }
+
+    updateUser(data: unknown): Observable<unknown> {
+        return this.http.post(USER_API + 'update', data, httpOptions);
     }
 }

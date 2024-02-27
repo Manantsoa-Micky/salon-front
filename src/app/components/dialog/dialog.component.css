@@ -1,0 +1,18 @@
+.heure-container{
+    display: flex;
+    width: 100%;
+}
+.heure-container > p {
+    margin: 1rem;
+}
+.ajout{
+    display: flex;
+    flex-direction: column;
+    margin-top: .5rem;
+}
+.full-width-input{
+    width: 100%;
+}
+button{
+    margin: 10px;
+}
