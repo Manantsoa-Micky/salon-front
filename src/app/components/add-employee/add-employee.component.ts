@@ -1,7 +1,7 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, Injector } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
     selector: 'app-add-employee',

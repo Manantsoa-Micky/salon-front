@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from '../components/header/header.component';
-import { CardListComponent } from '../components/card-list/card-list.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { CardListComponent } from '../../components/card-list/card-list.component';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { LayoutService } from '../_services/layout.service';
+import { LayoutService } from '../../_services/layout.service';
 export interface Tile {
     color: string;
     cols: number;
