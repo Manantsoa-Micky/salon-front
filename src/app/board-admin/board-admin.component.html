@@ -1,14 +1,4 @@
-<!-- @for (tile of tiles; track tile) {
-    <mat-grid-tile
-        [colspan]="tile.cols"
-        [rowspan]="tile.rows"
-        [style.background]="tile.color"
-        >{{ tile.text }}</mat-grid-tile
-    >
-    } -->
-
 <div class="c-container">
-    <app-header></app-header>
     <mat-drawer-container class="sidebar">
         <mat-drawer mode="side" opened><app-sidebar></app-sidebar></mat-drawer>
         <mat-drawer-content

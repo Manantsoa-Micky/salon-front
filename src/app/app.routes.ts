@@ -3,14 +3,17 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { ProductsComponent } from './products/products.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { LeavesComponent } from './leaves/leaves.component';
 import { GestionEmployeeComponent } from './pages/gestion-employee/gestion-employee.component';
+import { NosServicesComponent } from './pages/nos-services/nos-services.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'services', component: ProductsComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'services', component: NosServicesComponent },
+    { path: 'contact', component: ContactsComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     {
