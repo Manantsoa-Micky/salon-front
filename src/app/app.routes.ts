@@ -16,10 +16,10 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: BoardAdminComponent,
-        canActivate: [authGuard],
-        data: {
-            role: 'manager',
-        },
+        // canActivate: [authGuard],
+        // data: {
+        //     role: 'manager',
+        // },
         children: [
             {
                 path: 'list',
