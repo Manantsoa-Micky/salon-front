@@ -11,3 +11,6 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+.mdc-notched-outline__notch {
+    border-right: none;
+}

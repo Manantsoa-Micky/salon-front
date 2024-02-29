@@ -1,6 +1,6 @@
-<div class="top-part">
-    <h1 style="margin-top: 10px">Gestion du personnel</h1>
-    <div class="search-part">
+<div class="flex gap-10 items-baseline ml-5 mt-3">
+    <h1>Gestion du personnel</h1>
+    <div>
         <mat-form-field appearance="outline">
             <mat-icon matPrefix>search</mat-icon>
             <mat-label>Rechercher</mat-label>
@@ -13,14 +13,10 @@
     </div>
 </div>
 <mat-divider></mat-divider>
-<div class="bottom-part">
+<div class="mx-6">
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab label="Tous les salariés"
-            ><table
-                mat-table
-                [dataSource]="USER_DATA$"
-                class="mat-elevation-z3"
-            >
+        <mat-tab label="Tous les salariés">
+            <table mat-table [dataSource]="USER_DATA$">
                 <ng-container matColumnDef="matricule">
                     <th mat-header-cell *matHeaderCellDef>Matricule</th>
                     <td mat-cell *matCellDef="let element">
@@ -48,7 +44,7 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef>Actions</th>
                     <td mat-cell *matCellDef="let element">
-                        <div class="button-actions">
+                        <div>
                             <button
                                 mat-stroked-button
                                 (click)="openDialog(element._id)"
@@ -74,37 +70,28 @@
             <mat-paginator
                 [pageSizeOptions]="[5, 10, 20]"
                 showFirstLastButtons
-                aria-label="Select page of periodic elements"
+                aria-label="Select page of users"
             >
-            </mat-paginator
-        ></mat-tab>
+            </mat-paginator>
+        </mat-tab>
         <mat-tab label="Ajout d'un salarié">
             <form
                 id="userForm"
                 [formGroup]="employeeForm"
                 (ngSubmit)="addUser()"
-                class="ajout"
+                class="flex mx-10 gap-4"
             >
-                <div style="display: flex; flex-direction: column; width: 50%">
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
+                <div class="flex flex-col w-[50%]">
+                    <mat-form-field appearance="outline">
                         <mat-label>Nom</mat-label>
                         <input matInput required formControlName="firstName" />
                     </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
+                    <mat-form-field appearance="outline">
                         <mat-label>Prénom</mat-label>
                         <input matInput required formControlName="lastName" />
                     </mat-form-field>
 
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
+                    <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
                         <input
                             matInput
@@ -113,10 +100,7 @@
                             required
                         />
                     </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
+                    <mat-form-field appearance="outline">
                         <mat-label>Mot de Passe</mat-label>
                         <input
                             matInput
@@ -124,10 +108,7 @@
                             formControlName="password"
                         />
                     </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
+                    <mat-form-field appearance="outline">
                         <mat-label>Nom d'utilisateur</mat-label>
                         <input
                             matInput
@@ -136,11 +117,8 @@
                         />
                     </mat-form-field>
                 </div>
-                <div style="display: flex; flex-direction: column">
-                    <mat-form-field
-                        appearance="outline"
-                        class="full-width-input"
-                    >
+                <div class="flex flex-col w-[50%]">
+                    <mat-form-field appearance="outline">
                         <mat-label>Adresse</mat-label>
                         <input
                             matInput
@@ -151,10 +129,7 @@
                     </mat-form-field>
 
                     <div class="form-right-side">
-                        <mat-form-field
-                            appearance="outline"
-                            class="full-width-input"
-                        >
+                        <mat-form-field appearance="outline">
                             <mat-label>Numéro</mat-label>
                             <input
                                 matInput
@@ -168,7 +143,6 @@
                         <mat-form-field
                             floatLabel="always"
                             appearance="outline"
-                            class="full-width-input"
                         >
                             <mat-label>Salaire</mat-label>
                             <input
@@ -181,11 +155,7 @@
                         </mat-form-field>
                     </div>
                     <div formGroupName="hours" class="heure-container">
-                        <mat-form-field
-                            appearance="outline"
-                            class="full-width-input"
-                            required
-                        >
+                        <mat-form-field appearance="outline" required>
                             <mat-label>Heure début</mat-label>
                             <input
                                 matInput
@@ -195,10 +165,7 @@
                             />
                         </mat-form-field>
                         <p>à</p>
-                        <mat-form-field
-                            appearance="outline"
-                            class="full-width-input"
-                        >
+                        <mat-form-field appearance="outline">
                             <mat-label>Heure fin</mat-label>
                             <input
                                 matInput
@@ -218,10 +185,16 @@
                             }
                         </mat-select>
                     </mat-form-field>
-                    <button type="submit" mat-stroked-button>Ajouter</button>
+                    <button
+                        type="submit"
+                        mat-stroked-button
+                        [disabled]="!employeeForm.valid"
+                    >
+                        Ajouter
+                    </button>
                 </div>
             </form>
         </mat-tab>
-        <mat-tab label="Planning">Content 3</mat-tab>
+        <!-- <mat-tab label="Planning">Content 3</mat-tab> -->
     </mat-tab-group>
 </div>
