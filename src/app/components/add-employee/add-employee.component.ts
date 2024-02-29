@@ -2,6 +2,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, Injector } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
+import { UserDTO } from '../../_models/signup.model';
 
 @Component({
     selector: 'app-add-employee',
@@ -34,7 +35,7 @@ export class AddEmployeeComponent {
     roles = ['Manager', 'Employé', 'Client'];
     onSubmit() {
         this.isLoading = true;
-        this.authService.signup(this.employeeForm.value).subscribe({
+        this.authService.signup(this.employeeForm.value as UserDTO).subscribe({
             next: (data) => {
                 this.isLoading = false;
 

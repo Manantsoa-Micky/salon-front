@@ -16,6 +16,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { UserService } from '../../_services/user.service';
 import { concatMap } from 'rxjs';
+import { UserDTO } from '../../_models/signup.model';
 
 export interface EmployeeData {
     _id: string;
@@ -121,14 +122,16 @@ export class GestionEmployeeComponent implements AfterViewInit {
             console.log(this.employeeForm.value);
         } else {
             console.log(this.employeeForm.value);
-            this.authService.signup(this.employeeForm.value).subscribe({
-                next: (data) => {
-                    this.isLoading = false;
-                },
-                error: (err) => {
-                    this.isLoading = false;
-                },
-            });
+            this.authService
+                .signup(this.employeeForm.value as UserDTO)
+                .subscribe({
+                    next: (data) => {
+                        this.isLoading = false;
+                    },
+                    error: (err) => {
+                        this.isLoading = false;
+                    },
+                });
         }
     }
     getErrorMessage() {}

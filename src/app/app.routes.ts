@@ -6,6 +6,7 @@ import { LeavesComponent } from './components/leaves/leaves.component';
 import { GestionEmployeeComponent } from './pages/gestion-employee/gestion-employee.component';
 import { NosServicesComponent } from './pages/nos-services/nos-services.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
+import { authGuard } from './_helpers/auth.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,6 +16,10 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: BoardAdminComponent,
+        canActivate: [authGuard],
+        data: {
+            role: 'manager',
+        },
         children: [
             {
                 path: 'list',
